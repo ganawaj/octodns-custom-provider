@@ -43,7 +43,7 @@ class ZoneFileProvider(BaseProvider):
     }
     '''
 
-    def __init__(self, id, directory, soa, soa_ttl=3600, file_extension = '', file_prefix='', support_root_ns = True):
+    def __init__(self, id, directory, file_prefix, soa, soa_ttl=3600, file_extension = '', support_root_ns = True):
         '''
         Arguments
         =========
