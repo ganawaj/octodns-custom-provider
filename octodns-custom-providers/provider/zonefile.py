@@ -43,7 +43,7 @@ class ZoneFileProvider(BaseProvider):
     }
     '''
 
-    def __init__(self, id, directory, soa, soa_ttl=3600, file_extension = '', support_root_ns = True):
+    def __init__(self, id, directory, soa, soa_ttl=3600, file_extension = '', file_prefix='', support_root_ns = True):
         '''
         Arguments
         =========
@@ -51,12 +51,14 @@ class ZoneFileProvider(BaseProvider):
         directory: str
         soa: dict
         extension: str
+        prefix: str
         '''
         self.log = logging.getLogger('ZoneFileProvider[{}]'.format(id))
         self.log.debug('__init__: directory={}'.format(directory))
 
         self.directory = directory
         self.file_extension = file_extension
+        self.file_prefix = file_prefix
         self.soa = soa
         self.soa_ttl = soa_ttl
         self.support_root_ns = support_root_ns
@@ -128,4 +130,4 @@ class ZoneFileProvider(BaseProvider):
 
             zone.replace_rdataset(name, rdset)
 
-        zone.to_file(self.directory + '/' + plan.desired.name + self.file_extension)
+        zone.to_file(self.directory + '/' + self.file_prefix + plan.desired.name + self.file_extension)
